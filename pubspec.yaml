@@ -11,6 +11,9 @@ dependencies:
     sdk: flutter
   supabase_flutter: ^2.9.0
 
+dependency_overrides:
+  app_links: 6.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
