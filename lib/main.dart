@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 void main() => runApp(const ArwahApp());
 
@@ -511,14 +510,6 @@ class AddProjectPage extends StatefulWidget {
 class _AddProjectPageState extends State<AddProjectPage> {
   String type = projectTypes.first;
   String wilaya = wilayas.first;
-  final picker = ImagePicker();
-  final images = <XFile>[];
-
-  Future<void> pickImages() async {
-    final selected = await picker.pickMultiImage();
-    if (selected.isNotEmpty) setState(() => images.addAll(selected));
-  }
-
   @override
   Widget build(BuildContext context) => Directionality(
         textDirection: TextDirection.rtl,
@@ -549,12 +540,12 @@ class _AddProjectPageState extends State<AddProjectPage> {
                       border: OutlineInputBorder())),
               const SizedBox(height: 12),
               OutlinedButton.icon(
-                onPressed: pickImages,
+                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('إضافة الصور ستكون متاحة في التحديث القادم')),
+                ),
                 icon: const Icon(Icons.photo_library),
                 label: const Text('إضافة صور للمشروع'),
               ),
-              if (images.isNotEmpty)
-                Text('تم اختيار ${images.length} صورة'),
               const SizedBox(height: 15),
               const Text('هل المشروع يحتاج عمالاً؟',
                   style: TextStyle(fontWeight: FontWeight.bold)),
