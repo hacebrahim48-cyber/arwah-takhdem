@@ -23,8 +23,12 @@ jobs:
       - name: Check Flutter
         run: flutter --version
 
-      - name: Create Android project files
-        run: flutter create --project-name arwah_takhdem --platforms=android .
+      - name: Fix Dart package syntax
+        run: |
+          sed -i 's/package\\:/package:/g' lib/main.dart
+          sed -i 's/supabase\\_flutter/supabase_flutter/g' lib/main.dart
+          echo "Checking import:"
+          sed -n '1,8p' lib/main.dart
 
       - name: Get dependencies
         run: flutter pub get
