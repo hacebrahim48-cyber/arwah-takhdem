@@ -20,19 +20,35 @@ jobs:
           flutter-version: '3.24.5'
           channel: 'stable'
 
-      - name: Check Flutter
-        run: flutter --version
+      - name: Check project
+        run: |
+          echo "===== CURRENT DIRECTORY ====="
+          pwd
+          echo "===== FILES ====="
+          ls -la
+          echo "===== PUBSPEC ====="
+          sed -n '1,80p' pubspec.yaml
+          echo "===== MAIN DART ====="
+          sed -n '1,10p' lib/main.dart
 
       - name: Create Flutter project
-        run: flutter create --project-name arwah_takhdem --platforms=android .
-
-      - name: Check main.dart
         run: |
-          echo "===== main.dart first lines ====="
+          flutter create --project-name arwah_takhdem --platforms=android --no-pub .
+
+      - name: Check files after create
+        run: |
+          echo "===== PUBSPEC AFTER FLUTTER CREATE ====="
+          grep -n "supabase_flutter" pubspec.yaml || true
+          echo "===== MAIN AFTER FLUTTER CREATE ====="
           sed -n '1,10p' lib/main.dart
 
       - name: Get dependencies
         run: flutter pub get
+
+      - name: Check Supabase dependency
+        run: |
+          echo "===== SUPABASE DEPENDENCY ====="
+          flutter pub deps | grep supabase_flutter || true
 
       - name: Build APK
         run: flutter build apk --release
