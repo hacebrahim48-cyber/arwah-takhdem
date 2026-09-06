@@ -713,7 +713,7 @@ class NotificationsPage extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           appBar: AppBar(title: const Text('الإشعارات')),
-          body: const ListView(
+          body: ListView(
             children: [
               ListTile(
                 leading: Icon(Icons.notifications),
@@ -738,7 +738,7 @@ class ProfilePage extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           appBar: AppBar(title: const Text('حسابي')),
-          body: const ListView(
+          body: ListView(
             padding: EdgeInsets.all(18),
             children: [
               CircleAvatar(radius: 45, child: Icon(Icons.person, size: 50)),
